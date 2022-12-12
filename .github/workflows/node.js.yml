@@ -1,0 +1,46 @@
+name: Build React.js to production
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Install dependencies
+      run: npm install
+      
+    - name: Checkout branch
+      run: git checkout -b build
+
+    - name: Build
+      run: npm run build
+      
+    - name: Loggin into Github
+      run: git config --global user.name "${{ github.actor }}" && 
+           git config --global user.email "${{ github.actor }}@users.noreply.github.com" &&
+           export GITHUB_USER="${{ github.actor }}"
+
+    - name: Saving build
+      run: git add * :!node_modules &&
+           git commit -m "Github action build"
+           
+    - name: Push
+      run: git push origin build
