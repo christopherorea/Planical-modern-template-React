@@ -43,4 +43,5 @@ jobs:
            git commit -m "Github action build"
            
     - name: Push
-      run: git push origin build
+      run: git pull origin build &&
+           git push origin build
