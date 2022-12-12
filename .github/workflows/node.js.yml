@@ -43,5 +43,5 @@ jobs:
            git commit -m "Github action build"
            
     - name: Push
-      run: git pull --ff-only &&
+      run: git pull --ff-only origin build &&
            git push origin build
