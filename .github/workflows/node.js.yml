@@ -28,7 +28,7 @@ jobs:
       run: npm install
       
     - name: Checkout branch
-      run: git pull origin build && 
+      run: git pull --no-rebase origin build && 
            git checkout -b build
 
     - name: Build
