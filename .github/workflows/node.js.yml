@@ -30,10 +30,9 @@ jobs:
            export GITHUB_USER="${{ github.actor }}"
       
     - name: Checkout branch
-      run: git add * :!.github/workflows/ &&
-           git stash &&
-           git pull --no-rebase origin build --allow-unrelated-histories && 
-           git checkout -b build
+      run: git stash && 
+           git checkout -b build &&
+           git stash pop
 
     - name: Install dependencies
       run: npm install
