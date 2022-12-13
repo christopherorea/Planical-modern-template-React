@@ -28,7 +28,8 @@ jobs:
       run: npm install
       
     - name: Checkout branch
-      run: git checkout -b build
+      run: git pull origin build && 
+           git checkout -b build
 
     - name: Build
       run: npm run build
@@ -43,5 +44,4 @@ jobs:
            git commit -m "Github action build"
            
     - name: Push
-      run: git pull origin build --rebase &&
-           git push origin build
+      run: git push origin build
