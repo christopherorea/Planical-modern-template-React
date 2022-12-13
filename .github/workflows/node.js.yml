@@ -30,17 +30,17 @@ jobs:
            export GITHUB_USER="${{ github.actor }}"
       
     - name: Checkout branch
-      run: git checkout -b build
+      run: git checkout -b gh-pages
            
     - name: Install dependencies
       run: npm install
 
     - name: Build
-      run: npm run build
+      run: npm run deploy
 
     - name: Saving build
       run: git add * :!node_modules &&
            git commit -m "Github action build"
            
     - name: Push
-      run: git push -f origin build
+      run: git push -f origin gh-pages
