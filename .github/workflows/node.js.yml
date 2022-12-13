@@ -27,17 +27,17 @@ jobs:
     - name: Install dependencies
       run: npm install
       
+    - name: Loggin into Github
+      run: git config --global user.name "${{ github.actor }}" && 
+           git config --global user.email "${{ github.actor }}@users.noreply.github.com" &&
+           export GITHUB_USER="${{ github.actor }}"
+      
     - name: Checkout branch
       run: git pull --no-rebase origin build --allow-unrelated-histories && 
            git checkout -b build
 
     - name: Build
       run: npm run build
-      
-    - name: Loggin into Github
-      run: git config --global user.name "${{ github.actor }}" && 
-           git config --global user.email "${{ github.actor }}@users.noreply.github.com" &&
-           export GITHUB_USER="${{ github.actor }}"
 
     - name: Saving build
       run: git add * :!node_modules &&
