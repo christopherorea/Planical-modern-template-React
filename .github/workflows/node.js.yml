@@ -30,7 +30,7 @@ jobs:
            export GITHUB_USER="${{ github.actor }}"
       
     - name: Checkout branch
-      run: git add * :!github/workflows/ &&
+      run: git add * :!.github/workflows/ &&
            git stash &&
            git pull --no-rebase origin build --allow-unrelated-histories && 
            git checkout -b build
