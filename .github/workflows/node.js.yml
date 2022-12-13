@@ -33,10 +33,12 @@ jobs:
       run: git checkout -b gh-pages
            
     - name: Install dependencies
-      run: npm install
+      run: npm install && 
+           npm install gh-pages
 
     - name: Build
-      run: npm run deploy
+      run: npm run build &&
+           gh-pages -d build
 
     - name: Saving build
       run: git add * :!node_modules &&
